@@ -1,0 +1,51 @@
+Requirements:
+
+Want to present a chart of stock value by time given an input of a certain stock
+Use python charting capabilities to produce the charts from data
+Call data from an API such as marketstack
+Have around 30 data points per chart which can be used for years, months, days, etc
+Decouple as much as possible from the specific API 
+
+
+Steps:
+    Find appropriate API and download module if necessary - 1 day
+        Looks like marketstack has the appropriate information, but deciding on how to choose intervals is needed
+            Might be dependent on if the market happens to be closed some days or is likely accounted for by API
+        
+
+    Examine the necessary API call and the data it returns to clarify what the limitations and capabilities of the API are - 1 day
+         How much data can the API produce for me?
+         How accessible is the data going to be to a non-programmer client?
+         Which attributes would be useful?
+         If we need to make multiple calls for multiple data points throughout the years, we need to figure out how to make those API calls and store the data without having repetitive code 
+
+
+    Research python charting's necessities and production potential and practice it with dummy data to create similar charts - 3 days
+        How is the chart going to be stored if it needs to be presented on an html page? 
+        How much data is too much to need a database?
+        What features does python charts have that would make it efficient for the user to gain information from? 
+            is it responsive? is it just an image? is it manipulable in any way?
+        Using dummy data, test how python chart reacts if too much data is entered, too little, and what is necessary for the chart to be produced properly
+        Once we create a chart with dummy data, there will likely be lots of testing necessary to make sure that it's appropriately depicted on the html page
+
+
+    Transforming the data from the API into a form that python can work with (parse json, extract values into variables, etc.) - 2 days
+        If multiple API calls are necessary, how will I store the variables? 
+        Does python charting have a mechanism to handle this? 
+        Do I need to create temporary variables and append them to a list?
+        What happens if the API is maxed out mid program?
+
+
+    Replace dummy data with API data - 2 days
+        Refactoring would likely take place here since we would be actually putting our data into the python, making it easier to see how we might create dependencies - 2 days
+
+
+    Webpage design - 2 days
+        Maybe internalize it all into a website with python, so you can enter your request into a website instead of terminal (stretch goal?)
+        Getting the html input and translating that into the terms for an API call would certainly have some bugs, simply because of html rust
+
+
+
+    
+
+    
