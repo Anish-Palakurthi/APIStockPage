@@ -47,7 +47,7 @@ def addData(date, stock1, stock2):
     data = api.text
     parsed_json = json.loads(data)
     # adds in each data and close price into array from data list
-    for x in range(len(parsed_json['data'])):
+    for x in range(len(parsed_json["data"])):
         date = (
             (parsed_json["data"])[x])["date"]
         dates.append(date)
@@ -60,8 +60,8 @@ def addData(date, stock1, stock2):
     data = api.text
     parsed_json = json.loads(data)
     # same as before except only closing prices for second stock
-    for line in parsed_json["data"]:
-        close2 = ((parsed_json["data"])[0])["close"]
+    for x in range(len(parsed_json["data"])):
+        close2 = ((parsed_json["data"])[x])["close"]
         closes2.append(close2)
 
 
