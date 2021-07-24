@@ -72,18 +72,30 @@ addData(date, stockOne, stockTwo)  # add data into arrays
 
 
 #x = np.arange(1, (len(closes1)+1))
+dates.reverse()
+
 
 x = np.array(dates)  # stores axes' values from arrays
 y = np.array(closes1)
 z = np.array(closes2)
 
+
 plt.title('{sym1} (Green) vs {sym2} (Blue)'.format(
     sym1=stockOne, sym2=stockTwo))
-plt.xlabel("Date")
+plt.xlabel("Date from {firstDay} to current day".format(firstDay=dates[0]))
 plt.ylabel('Value of Share ($)')
+
+ax = plt.gca()
+
+ax.axes.xaxis.set_ticklabels([])
+
 plt.plot(x, y,  color='green')
 plt.plot(x, z, color='blue')
+
+plt.grid(True)
+
 plt.savefig("chart.png")
+
 plt.show()
 
 page = open("stockpage.html", "w")
