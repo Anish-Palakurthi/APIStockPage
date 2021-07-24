@@ -85,3 +85,12 @@ plt.plot(x, y,  color='green')
 plt.plot(x, z, color='blue')
 plt.savefig("chart.png")
 plt.show()
+
+page = open("stockpage.html", "w")
+message = """<html>
+    <head> <link rel="stylesheet" href="stockpage.css"></head>
+    <body> <img src = "chart.png"> </body>
+    </html>"""
+
+page.write(message)
+page.close()
