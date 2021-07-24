@@ -77,9 +77,11 @@ x = np.array(dates)  # stores axes' values from arrays
 y = np.array(closes1)
 z = np.array(closes2)
 
-plt.title('{sym1} vs {sym2}'.format(sym1=stockOne, sym2=stockTwo))
+plt.title('{sym1} (Green) vs {sym2} (Blue)'.format(
+    sym1=stockOne, sym2=stockTwo))
 plt.xlabel("Date")
 plt.ylabel('Value of Share ($)')
 plt.plot(x, y,  color='green')
 plt.plot(x, z, color='blue')
+plt.savefig("chart.png")
 plt.show()
