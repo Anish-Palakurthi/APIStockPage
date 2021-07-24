@@ -83,24 +83,3 @@ plt.ylabel('Value of Share ($)')
 plt.plot(x, y,  color='green')
 plt.plot(x, z, color='blue')
 plt.show()
-
-
-def checkDateValid(date):
-    api = requests.get(
-        "http://api.marketstack.com/v1/eod/2021-10-14?access_key=469ed3642bddff1dee77e5b1332ce3b7&symbols=AAPL")
-
-    data = api.text
-    parsed_json = json.loads(data)
-    if((len((parsed_json["data"])) == 0)):
-        print("bad date")
-        return False
-
-    return True
-
-
-def finalPermit(date):
-    if(isDateReal(date)):
-        if(checkDateValid(date)):
-            return True
-
-    return False
