@@ -64,7 +64,29 @@ def addData(date, stock1, stock2):
   # add data into arrays
 
 
-#x = np.arange(1, (len(closes1)+1))
+# x = np.arange(1, (len(closes1)+1))
+def createChart(stockOne, stockTwo):
+    x = np.array(dates)  # stores axes' values from arrays
+    y = np.array(closes1)
+    z = np.array(closes2)
+
+    plt.title('{sym1} (Green) vs {sym2} (Blue)'.format(
+        sym1=stockOne, sym2=stockTwo))
+    plt.xlabel("Date from {firstDay} to current day".format(firstDay=dates[0]))
+    plt.ylabel('Value of Share ($)')
+
+    ax = plt.gca()
+
+    ax.axes.xaxis.set_ticklabels([])
+
+    plt.plot(x, y,  color='green')
+    plt.plot(x, z, color='blue')
+
+    plt.grid(True)
+
+    plt.savefig("chart.png")
+
+    # plt.show()
 
 
 app = Flask(__name__)
@@ -93,6 +115,12 @@ def datep(date2, stock1, stock2):
 
     addData(date2, stock1, stock2)
     dates.reverse()
+    createChart(stock1, stock2)
+    return render_template("stockpage.html")
+
+
+    # return(dates[0] + str(closes1[0]) + str(closes2[0]))
+'''
     x = np.array(dates)  # stores axes' values from arrays
     y = np.array(closes1)
     z = np.array(closes2)
@@ -114,11 +142,7 @@ def datep(date2, stock1, stock2):
     plt.savefig("chart.png")
 
     plt.show()
-
-    return("""<html>
-    <head> <link rel="stylesheet" href="stockpage.css"></head>
-    <body> <img src = "chart.png"> </body>
-    </html>""")
+    '''
 
 
 if __name__ == "__main__":
