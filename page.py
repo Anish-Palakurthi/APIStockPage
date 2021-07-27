@@ -85,6 +85,7 @@ def createChart(stockOne, stockTwo):
     plt.grid(True)
 
     plt.savefig("chart.png")
+    plt.close()
 
     # plt.show()
 
@@ -116,6 +117,7 @@ def datep(date2, stock1, stock2):
     addData(date2, stock1, stock2)
     dates.reverse()
     createChart(stock1, stock2)
+    print("plaese work")
     return render_template("stockpage.html")
 
 
