@@ -93,30 +93,6 @@ def createChart(stockOne, stockTwo):
     # plt.show()
 
 
-form = cgi.FieldStorage()
-datePrime = form.getvalue('dt')
-print(datePrime)
-stock1Prime = form.getvalue('s1')
-stock2Prime = form.getvalue('s2')
-
-if (isDateReal(datePrime) == False):
-    print("bad date")
-    exit()  # precheck for date
-
-addData(str(datePrime), stock1Prime, stock2Prime)
-dates.reverse()
-createChart(stock1Prime, stock2Prime)
-
-f = open("stockpage.html", "w")  # opens html page under the handle
-message = """<html>
-    <head> </head>
-    <body> <img src = "chart.png" </body>
-    </html>"""
-# by using .format, I can replace the interim variables in the message variable with the newly updated data retrieved from the API without having to couple the order of the words or deal with lengthy parantheses
-f.write(message)
-f.close()
-
-'''
 app = Flask(__name__)
 
 
@@ -129,7 +105,7 @@ def home():
 
         stock2Prime = request.form["s2"]
 
-        return ("Check out stockpage.html!")
+       # return ("Check out stockpage.html!")
 
     else:
 
@@ -146,6 +122,18 @@ if (isDateReal(datePrime) == False):
 addData(str(datePrime), stock1Prime, stock2Prime)
 dates.reverse()
 createChart(stock1Prime, stock2Prime)
+
+
+f = open("stockpage.html", "w")  # opens html page under the handle
+message = """<html>
+    <head> </head>
+    <body> <img src = "chart.png" </body>
+    </html>"""
+# by using .format, I can replace the interim variables in the message variable with the newly updated data retrieved from the API without having to couple the order of the words or deal with lengthy parantheses
+f.write(message)
+f.close()
+
+'''
 
 '''
 
