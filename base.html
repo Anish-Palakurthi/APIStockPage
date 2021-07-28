@@ -22,9 +22,20 @@
             var inputS1 = document.getElementById("s1").value;
             var inputS2 = document.getElementById("s2").value;
 
-            // Displaying the value
-            alert(inputDate + inputS1 + inputS2);
+            const dates = []
+            const closes1 = []
+            const closes2 = []
+
+            url1 = "http://api.marketstack.com/v1/eod?access_key=469ed3642bddff1dee77e5b1332ce3b7&symbols="
+            url2 = "&date_from="
+            urlTotal = url1.concat(inputS1).concat(url2).concat(inputDate)
+            fetch(urlTotal)
+                .then(res => res.json())
+                .then((out) => {
+                    console.log('Output: ', out);
+                }).catch(err => console.error(err));
         }
+
     </script>
 </body>
 
