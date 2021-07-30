@@ -107,15 +107,21 @@
                     labels: dates,
                     datasets: [
                         {
-                            label: "Closing Price",
+                            label: "Closing Prices for " + inputS1,
                             data: closes1
+                        },
+                        {
+                            label: "Closing Prices for " + inputS2,
+                            data: closes2
                         }
+
                     ]
                 },
                 options: {
                     legend: { display: false },
                     title: {
                         display: true,
+                        text: inputS1 + " vs " + inputS2
 
                     }
                 }
