@@ -2,9 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Get the Value of Text Input Field in JavaScript</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>StockPage JS Attempt</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+
 
 </head>
 
@@ -14,8 +19,10 @@
         <input type="text" placeholder="Stock 1" id="s1">
         <input type="text" placeholder="Stock 2" id="s2">
 
-        <button type="button" onclick="getInputValue();">Submit</button>
+        <button type="button" onclick="getInputValue(); ">Submit</button>
     </form>
+
+    <div><canvas id="myChart"></canvas></div>
 
     <script>
         function getInputValue() {
@@ -36,16 +43,14 @@
                 let response = await fetch(urlTotal);
                 let text = await response.json();
 
-                let dataArray = text.data
+                let dataArray = text.data;
                 for (let i = 0; i < dataArray.length; i++) {
-                    closes1.push(dataArray[i].close)
-                    dates.push(dataArray[i].date)
-                    console.log(closes1[i])
-                    console.log(dates[i])
+                    closes1.push(dataArray[i].close);
+                    dates.push(dataArray[i].date);
 
                 }
             }
-            callAPI1()
+            callAPI1();
 
             let urlTotal2 = url1.concat(inputS2).concat(url2).concat(inputDate);
             async function callAPI2() {
@@ -54,40 +59,60 @@
 
                 let dataArray = text.data
                 for (let i = 0; i < dataArray.length; i++) {
-                    closes2.push(dataArray[i].close)
-                    console.log(closes2[i])
+                    closes2.push(dataArray[i].close);
 
                 }
 
             }
-            callAPI2()
+            callAPI2();
 
 
 
         }
-    </script>
 
-    <div>
-        <canvas id="myChart"></canvas>
-    </div>
+        console.log("first")
+        let myChart = document.getElementById("myChart").getContext("2d");
+        new Chart(document.getElementById("myChart"), {
+            type: 'bar',
+            data: {
+                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                datasets: [
+                    {
+                        label: "Population (millions)",
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                        data: [2478, 5267, 734, 784, 433]
+                    }
+                ]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+                }
+            }
+        });
 
-    <script>
-        console.log("Past canvas")
-        let myChart = document.getElementById('myChart').getContext("2d");
         let lineChart = new Chart(myChart, {
             type: "line",
             data: {
                 labels: ["One", "Two", "Three"],
-                dataset: {
+                dataset: [{
                     label: "Closing Price",
-                    data: [5, 10, 15],
-                    options: {}
-                }
-            }
-        })
+                    data: [5, 10, 15]
 
+                }]
+            },
+            options: {}
+
+        });
+        console.log("second")
 
     </script>
+
+
+
+
 </body>
 
 </html>
