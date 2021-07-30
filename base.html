@@ -22,18 +22,43 @@
             var inputS1 = document.getElementById("s1").value;
             var inputS2 = document.getElementById("s2").value;
 
-            const dates = []
-            const closes1 = []
-            const closes2 = []
+            const dates = [];
+            const closes1 = [];
+            const closes2 = [];
 
-            url1 = "http://api.marketstack.com/v1/eod?access_key=469ed3642bddff1dee77e5b1332ce3b7&symbols="
-            url2 = "&date_from="
-            urlTotal = url1.concat(inputS1).concat(url2).concat(inputDate)
-            fetch(urlTotal)
-                .then(res => res.json())
-                .then((out) => {
-                    console.log('Output: ', out);
-                }).catch(err => console.error(err));
+            let url1 = "http://api.marketstack.com/v1/eod?access_key=469ed3642bddff1dee77e5b1332ce3b7&symbols=";
+            let url2 = "&date_from=";
+            let urlTotal = url1.concat(inputS1).concat(url2).concat(inputDate);
+
+            async function callAPI1() {
+                let response = await fetch(urlTotal);
+                let text = await response.json();
+
+                let dataArray = text.data
+                for (let i = 0; i < dataArray.length; i++) {
+                    closes1.push(dataArray[i].close)
+                    dates.push(dataArray[i].date)
+
+                }
+            }
+            callAPI1()
+
+            let urlTotal2 = url1.concat(inputS2).concat(url2).concat(inputDate);
+            async function callAPI2() {
+                let response = await fetch(urlTotal2);
+                let text = await response.json();
+
+                let dataArray = text.data
+                for (let i = 0; i < dataArray.length; i++) {
+                    closes1.push(dataArray[i].close)
+
+                }
+
+            }
+            callAPI2()
+
+
+
         }
 
     </script>
