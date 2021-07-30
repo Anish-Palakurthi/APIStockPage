@@ -61,15 +61,16 @@
 
             }
             callAPI2()
-        
 
-        
+
+
         }
     </script>
 
     <div>
         <canvas id="myChart"></canvas>
     </div>
+
     <script>
         console.log("Past canvas")
         let myChart = document.getElementById('myChart').getContext("2d");
@@ -80,27 +81,10 @@
                 dataset: {
                     label: "Closing Price",
                     data: [5, 10, 15],
-                    options : {}
+                    options: {}
                 }
             }
         })
-
-            /*
-            let myChart = document.getElementById("myChart").getContext("2d");
-            
-                        let lineChart = new Chart(myChart, {
-                            type: "line",
-                            data: {
-                                labels: [],
-                                datasets: {
-                                    label: "Closing Price ($)",
-                                    data: [closes1]
-                                }
-                            }*/
-
-
-
-        
 
 
     </script>
