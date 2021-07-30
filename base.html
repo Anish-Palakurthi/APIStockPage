@@ -73,14 +73,13 @@
         console.log("first")
         let myChart = document.getElementById("myChart").getContext("2d");
         new Chart(document.getElementById("myChart"), {
-            type: 'bar',
+            type: 'line',
             data: {
-                labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                labels: ["One", "Two", "three"],
                 datasets: [
                     {
-                        label: "Population (millions)",
-                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                        data: [2478, 5267, 734, 784, 433]
+                        label: "Closing Price",
+                        data: [2478, 5267, 734]
                     }
                 ]
             },
@@ -88,25 +87,12 @@
                 legend: { display: false },
                 title: {
                     display: true,
-                    text: 'Predicted world population (millions) in 2050'
+
                 }
             }
         });
 
-        let lineChart = new Chart(myChart, {
-            type: "line",
-            data: {
-                labels: ["One", "Two", "Three"],
-                dataset: [{
-                    label: "Closing Price",
-                    data: [5, 10, 15]
 
-                }]
-            },
-            options: {}
-
-        });
-        console.log("second")
 
     </script>
 
