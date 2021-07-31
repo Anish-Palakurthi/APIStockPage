@@ -74,10 +74,22 @@
                 return (closes2);
             }
 
+            function slimDate(datesArray) {
+                var dateList = [];
+                var goodList = [];
+                for (let i = 0; i < datesArray.length; i++) {
+                    dateList = (datesArray[i]).split("T");
+                    goodList.push(dateList[0]);
+                }
+
+                return (goodList);
+            }
+
             function createChart(combinedArray) {
                 console.log(combinedArray);
                 var dates = combinedArray[0];
                 dates = dates.reverse();
+                dates = slimDate(dates);
                 var closes1 = combinedArray[1];
                 closes1 = closes1.reverse();
                 var closes2 = combinedArray[2];
