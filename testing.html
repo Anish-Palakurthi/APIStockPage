@@ -33,9 +33,9 @@
         function getInputValue() {
             // Selecting the input element and get its value 
 
-            var inputDate = "2021-05-14";//document.getElementById("Date").value;
-            var inputS1 = "AAPL";//document.getElementById("s1").value;
-            var inputS2 = "TSLA";//document.getElementById("s2").value;
+            var inputDate = document.getElementById("Date").value;
+            var inputS1 = document.getElementById("s1").value;
+            var inputS2 = document.getElementById("s2").value;
 
             "http://api.marketstack.com/v1/eod?access_key=469ed3642bddff1dee77e5b1332ce3b7&symbols=AAPL,TSLA&date_from=2021-05-14";
 
@@ -74,36 +74,7 @@
                 return (closes2);
             }
 
-            function createChart(closes1, closes2, dates) {
-                let myChart = document.getElementById("myChart").getContext("2d");
-                new Chart(document.getElementById("myChart"), {
-                    type: 'line',
-                    data: {
-                        labels: dates,
-                        datasets: [
-                            {
-                                label: "Closing Prices for " + inputS1,
-                                data: closes1
-                            },
-                            {
-                                label: "Closing Prices for " + inputS2,
-                                data: closes2
-                            }
-
-                        ]
-                    },
-                    options: {
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: inputS1 + " vs " + inputS2
-
-                        }
-                    }
-                });
-            }
-
-            function createChartTest(combinedArray) {
+            function createChart(combinedArray) {
                 console.log(combinedArray);
                 var dates = combinedArray[0];
                 dates = dates.reverse();
@@ -119,11 +90,14 @@
                         datasets: [
                             {
                                 label: "Closing Prices for " + inputS1,
-                                data: closes1
+                                data: closes1,
+                                borderColor: "#009900"
                             },
                             {
                                 label: "Closing Prices for " + inputS2,
-                                data: closes2
+                                data: closes2,
+                                borderColor: "#0066CC"
+
                             }
 
 
@@ -133,7 +107,7 @@
                         legend: { display: false },
                         title: {
                             display: true,
-                            text: inputS1 + " vs " + inputS2
+                            text: inputS1 + "(Green) vs" + inputS2 + " (Blue"
 
                         }
                     }
@@ -142,7 +116,7 @@
 
             fetch(urlTotal).then(console.log("check 1"))
                 .then((response) => response.json())
-                .then((data) => callAPIdate(data.data)).then(tempCombined => createChartTest(tempCombined));
+                .then((data) => callAPIdate(data.data)).then(tempCombined => createChart(tempCombined));
             /*
         }).then(fetch(urlTotal2)).then((response2) => response2.json()).then((data2) => {
             var tempCloses2 = callAPI2(data2.data);
