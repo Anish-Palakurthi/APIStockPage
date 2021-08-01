@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>StockPage JS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="page.css">
+
+
+
+
+</head>
+
+<body>
+    <form>
+        <label>Enter Start Date (Must be within the last year in YYYY-MM-DD): </label>
+        <input type="text" placeholder="2021-01-01" id="Date">
+        <br>
+        <label>Enter First Stock Symbol: </label>
+        <input type="text" placeholder="Stock 1" id="s1">
+        <br>
+        <label>Enter Second Stock Symbol: </label>
+        <input type="text" placeholder="Stock 2" id="s2">
+        <br>
+        <p>Sample Stock Symbols: AAPL, TSLA, GOOG, FB, MSFT</p>
+        <button type="button" onclick="getInputValue(); ">Submit</button>
+    </form>
+
+    <div><canvas id="myChart"></canvas></div>
+
+    <script>
+        var dates = [];
+        var closes1 = [];
+        var closes2 = [];
+        var infoStored;
+
+        function getInputValue() {
+            // Selecting the input element and get its value 
+
+            var inputDate = document.getElementById("Date").value;
+            var inputS1 = document.getElementById("s1").value;
+            var inputS2 = document.getElementById("s2").value;
+
+            "http://api.marketstack.com/v1/eod?access_key=469ed3642bddff1dee77e5b1332ce3b7&symbols=AAPL,TSLA&date_from=2021-05-14";
+
+            var url1 = "http://api.marketstack.com/v1/eod?access_key=469ed3642bddff1dee77e5b1332ce3b7&symbols=";
+            var url2 = "&date_from=";
+            var urlTotal = url1.concat(inputS1).concat(",").concat(inputS2).concat(url2).concat(inputDate);
+
+
+            function callAPIdate(dataArray) {
+                var dates = [];
+                var closes1 = [];
+                var closes2 = [];
+                for (let i = 0; i < dataArray.length; i++) {
+                    if (dataArray[i].symbol == inputS1) {
+                        closes1.push(dataArray[i].close);
+                        dates.push(dataArray[i].date);
+                    }
+
+                    else if (dataArray[i].symbol == inputS2) {
+                        closes2.push(dataArray[i].close);
+                    }
+
+
+
+                }
+
+                var combined = [];
+                combined.push(dates);
+                combined.push(closes1);
+                combined.push(closes2);
+                return combined;
+            }
+
+
+            function callAPI2(dataArray) {
+                var closes2 = []
+
+                for (let i = 0; i < dataArray.length; i++) {
+                    closes2.push((dataArray[i].close));
+                }
+                return (closes2);
+            }
+
+            function slimDate(datesArray) {
+                var dateList = [];
+                var goodList = [];
+                for (let i = 0; i < datesArray.length; i++) {
+                    dateList = (datesArray[i]).split("T");
+                    goodList.push(dateList[0]);
+                }
+
+                return (goodList);
+            }
+
+            function createChart(combinedArray) {
+                console.log(combinedArray);
+                var dates = combinedArray[0];
+                dates = dates.reverse();
+                dates = slimDate(dates);
+                var closes1 = combinedArray[1];
+                closes1 = closes1.reverse();
+                var closes2 = combinedArray[2];
+                closes2 = closes2.reverse();
+                let myChart = document.getElementById("myChart").getContext("2d");
+                new Chart(document.getElementById("myChart"), {
+                    type: 'line',
+                    data: {
+                        labels: dates,
+                        datasets: [
+                            {
+                                label: "Closing Prices for " + inputS1,
+                                data: closes1,
+                                borderColor: "#009900"
+                            },
+                            {
+                                label: "Closing Prices for " + inputS2,
+                                data: closes2,
+                                borderColor: "#0066CC"
+
+                            }
+
+
+                        ]
+                    },
+                    options: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: "Price of Share ($) for " + inputS1 + "(Green) vs " + inputS2 + " (Blue)"
+
+                        }
+                    }
+                });
+            }
+
+            fetch(urlTotal).then(console.log("check 1"))
+                .then((response) => response.json())
+                .then((data) => callAPIdate(data.data)).then(tempCombined => createChart(tempCombined));
+
+
+
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
