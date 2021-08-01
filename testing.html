@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>StockPage JS Attempt2</title>
+    <title>StockPage JS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <link rel="stylesheet" href="page.css">
 
@@ -55,15 +55,20 @@
                 var dates = [];
                 var closes1 = [];
                 var closes2 = [];
-                for (let i = 0; i < dataArray.length; i += 2) {
-                    closes1.push(dataArray[i].close);
-                    dates.push(dataArray[i].date);
+                for (let i = 0; i < dataArray.length; i++) {
+                    if (dataArray[i].symbol == inputS1) {
+                        closes1.push(dataArray[i].close);
+                        dates.push(dataArray[i].date);
+                    }
+
+                    else if (dataArray[i].symbol == inputS2) {
+                        closes2.push(dataArray[i].close);
+                    }
+
+
 
                 }
-                for (let i = 1; i < dataArray.length; i += 2) {
-                    closes2.push(dataArray[i].close);
 
-                }
                 var combined = [];
                 combined.push(dates);
                 combined.push(closes1);
@@ -126,7 +131,7 @@
                         legend: { display: false },
                         title: {
                             display: true,
-                            text: inputS1 + "(Green) vs" + inputS2 + " (Blue)"
+                            text: inputS1 + "(Green) vs " + inputS2 + " (Blue)"
 
                         }
                     }
