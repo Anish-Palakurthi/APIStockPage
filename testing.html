@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>StockPage JS Attempt2</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="page.css">
 
 
 
@@ -15,10 +16,16 @@
 
 <body>
     <form>
-        <input type="text" placeholder="Date" id="Date">
+        <label>Enter Start Date (Must be within the last year in YYYY-MM-DD): </label>
+        <input type="text" placeholder="2021-01-01" id="Date">
+        <br>
+        <label>Enter First Stock Symbol: </label>
         <input type="text" placeholder="Stock 1" id="s1">
+        <br>
+        <label>Enter Second Stock Symbol: </label>
         <input type="text" placeholder="Stock 2" id="s2">
-
+        <br>
+        <p>Sample Stock Symbols: AAPL, TSLA, GOOG, FB, MSFT</p>
         <button type="button" onclick="getInputValue(); ">Submit</button>
     </form>
 
@@ -119,7 +126,7 @@
                         legend: { display: false },
                         title: {
                             display: true,
-                            text: inputS1 + "(Green) vs" + inputS2 + " (Blue"
+                            text: inputS1 + "(Green) vs" + inputS2 + " (Blue)"
 
                         }
                     }
@@ -129,11 +136,7 @@
             fetch(urlTotal).then(console.log("check 1"))
                 .then((response) => response.json())
                 .then((data) => callAPIdate(data.data)).then(tempCombined => createChart(tempCombined));
-            /*
-        }).then(fetch(urlTotal2)).then((response2) => response2.json()).then((data2) => {
-            var tempCloses2 = callAPI2(data2.data);
-        }).then(createChart(tempCloses1, tempCloses2, tempDates));
-        */
+
 
 
         }
